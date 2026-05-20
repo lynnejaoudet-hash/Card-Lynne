@@ -21,7 +21,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { background: var(--dark); font-family: 'Montserrat', sans-serif; color: var(--text); overflow-x: hidden; }
-  body { display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 0 0 40px; }
+  body { display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 0 0 48px; }
 
   .top-line {
     width: 100%; height: 2px;
@@ -35,17 +35,25 @@
     display: flex; flex-direction: column; align-items: center;
   }
 
-  .monogram {
-    width: 80px; height: 80px; border-radius: 50%;
+  /* Photo avatar */
+  .avatar {
+    width: 88px; height: 88px; border-radius: 50%;
     border: 1.5px solid var(--gold);
+    background: var(--surface);
+    margin-bottom: 20px; position: relative;
+    overflow: hidden;
     display: flex; align-items: center; justify-content: center;
-    background: var(--surface); margin-bottom: 20px; position: relative;
   }
-  .monogram::before {
+  .avatar::before {
     content: ''; position: absolute; inset: -5px; border-radius: 50%;
     border: 1px solid var(--border);
+    z-index: 2; pointer-events: none;
   }
-  .monogram span {
+  .avatar img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  }
+  /* Fallback monogram if no photo */
+  .avatar .fallback {
     font-family: 'Cormorant Garamond', serif;
     font-size: 30px; font-weight: 300; color: var(--gold); letter-spacing: -1px;
   }
@@ -55,13 +63,11 @@
     font-size: 34px; font-weight: 400; letter-spacing: 2px;
     text-align: center; color: var(--text); margin-bottom: 6px;
   }
-
   .title {
     font-size: 9px; font-weight: 300; letter-spacing: 3.5px;
     text-transform: uppercase; color: var(--gold);
     text-align: center; margin-bottom: 22px;
   }
-
   .divider {
     display: flex; align-items: center; gap: 10px;
     width: 100%; margin-bottom: 32px;
@@ -70,35 +76,32 @@
   .div-line.r { background: linear-gradient(90deg, var(--border), transparent); }
   .div-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.6; flex-shrink: 0; }
 
+  /* CONTACT BUTTONS */
   .contacts {
     width: 100%; max-width: 420px;
     padding: 0 24px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px;
   }
-
   .btn {
     display: flex; align-items: center; gap: 14px;
     padding: 14px 18px;
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 2px;
-    text-decoration: none; color: var(--text);
-    cursor: pointer;
+    text-decoration: none; color: var(--text); cursor: pointer;
   }
-
   .btn-icon {
     width: 32px; height: 32px; border-radius: 50%;
-    background: rgba(201,168,76,0.1); border: 1px solid var(--border);
+    background: rgba(201,168,76,0.08); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .btn-icon svg { width: 15px; height: 15px; fill: var(--gold); }
-
   .btn-info { flex: 1; }
   .btn-label { font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
   .btn-value { font-size: 13px; font-weight: 300; color: var(--text); }
   .btn-arrow { color: var(--gold-dim); font-size: 16px; flex-shrink: 0; }
 
+  /* CTA */
   .cta-wrap { width: 100%; max-width: 420px; padding: 0 24px; margin-bottom: 28px; }
-
   .cta {
     display: flex; align-items: center; justify-content: center; gap: 10px;
     width: 100%; padding: 16px;
@@ -108,23 +111,21 @@
   }
   .cta svg { width: 16px; height: 16px; fill: #0A0906; }
 
-  .about { width: 100%; max-width: 420px; padding: 0 24px; margin-bottom: 28px; }
-  .section-label {
-    font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 10px; opacity: 0.8;
-  }
-  .about-text {
-    font-size: 12px; font-weight: 300; color: var(--muted);
-    line-height: 1.85; border-left: 1px solid var(--border); padding-left: 14px;
-  }
+  /* ABOUT */
+  .about { width: 100%; max-width: 420px; padding: 0 24px; margin-bottom: 24px; }
+  .section-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; opacity: 0.8; }
+  .about-text { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.85; border-left: 1px solid var(--border); padding-left: 14px; }
 
+  /* TAGS */
   .tags {
     width: 100%; max-width: 420px; padding: 0 24px;
-    display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 36px;
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px;
   }
   .tag {
     font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--gold); border: 1px solid var(--border); padding: 5px 11px; border-radius: 1px;
+    color: var(--gold); border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 1px;
+    background: rgba(201,168,76,0.04);
   }
 
   .bottom-line {
@@ -132,7 +133,7 @@
     background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
     margin-bottom: 20px;
   }
-  .footer { font-size: 9px; letter-spacing: 2px; color: rgba(138,126,110,0.4); text-transform: uppercase; text-align: center; }
+  .footer { font-size: 9px; letter-spacing: 2px; color: rgba(138,126,110,0.35); text-transform: uppercase; text-align: center; }
 </style>
 </head>
 <body>
@@ -140,7 +141,11 @@
 <div class="top-line"></div>
 
 <div class="hero">
-  <div class="monogram"><span>LJ</span></div>
+  <div class="avatar">
+    <!-- Remplace le src par l'URL de ta photo quand tu héberges la page -->
+    <!-- <img src="photo.jpg" alt="Lynne Jaoudet"> -->
+    <span class="fallback">LJ</span>
+  </div>
   <div class="name">Lynne Jaoudet</div>
   <div class="title">Marketing Digital &nbsp;·&nbsp; Luxe, Beauté &amp; Lifestyle</div>
   <div class="divider">
@@ -185,7 +190,6 @@
   </a>
 </div>
 
-<!-- SAVE vCard -->
 <div class="cta-wrap">
   <a class="cta" href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3ALynne%20Jaoudet%0ATEL%3BTYPE%3DCELL%3A%2B33680334089%0AEMAIL%3Alynnejaoudet%40live.com%0AURL%3Ahttps%3A%2F%2Fwww.linkedin.com%2Fin%2Flynnejaoudet%2F%0ATITLE%3AMarketing%20Digital%20%7C%20Luxe%20%26%20Beaute%0AADR%3B%3B%3BCourbevoie%3B%3B%3BFrance%0AEND%3AVCARD" download="Lynne_Jaoudet.vcf">
     <svg viewBox="0 0 24 24"><path d="M12 16l-4-4h3V4h2v8h3l-4 4zm-7 4v-2h14v2H5z"/></svg>
@@ -202,11 +206,12 @@
 
 <div class="tags">
   <span class="tag">Luxe</span>
-  <span class="tag">Beauté</span>
-  <span class="tag">Trade Marketing</span>
+  <span class="tag">Cosmétiques</span>
+  <span class="tag">Marketing Digital</span>
   <span class="tag">Brand Communication</span>
-  <span class="tag">Lifestyle</span>
-  <span class="tag">IÉSEG 2025</span>
+  <span class="tag">Strategy</span>
+  <span class="tag">Créativité</span>
+  <span class="tag">IÉSEG</span>
 </div>
 
 <div class="bottom-line"></div>
